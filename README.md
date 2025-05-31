@@ -76,7 +76,7 @@ Distributed under the MIT License. See LICENSE for more information
 
 2.Set up virtual environment (recommended):
 
-       ```bash
+      ```bash
       python -m venv venv
       # Windows:
       venv\Scripts\activate
@@ -89,7 +89,7 @@ Distributed under the MIT License. See LICENSE for more information
     pip install -r requirements.txt    
 
  4. Run the application:
-   ```bash
+    ```bash
     python src/main.py   
 
    
