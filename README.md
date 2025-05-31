@@ -47,3 +47,89 @@ A comprehensive desktop application for managing school teachers, their subject 
    ```bash
    git clone https://github.com/your-username/school-timetable-manager.git
    cd school-timetable-manager
+
+2.Set up virtual environment (recommended):
+
+       ```bash
+      python -m venv venv
+      # Windows:
+      venv\Scripts\activate
+      # macOS/Linux:
+      source venv/bin/activate  
+
+ 3.Install dependencies:
+
+    ```bash
+    pip install -r requirements.txt    
+
+ 4. Run the application:
+
+   ```bash
+   python src/main.py   
+##🖥️ Usage
+###Adding a New Teacher
+Click "Add Teacher" from the main menu
+
+Fill in teacher details (name, contact info, etc.)
+
+Click "Save" to add to the system
+
+###Managing Subjects
+Select a teacher from the dropdown
+
+Choose subjects from the available list
+
+Assign to specific grade levels
+
+Click "Save Assignments"
+
+###Viewing Schedules
+Use the calendar view to see daily schedules
+
+Filter by teacher, grade, or subject
+
+Print or export schedules as needed
+
+##📂 Project Structure
+
+school-timetable/
+├── data/                   # JSON data files
+│   ├── teachers.json
+│   └── subjects.json
+├── src/                    # Source code
+│   ├── main.py             # Entry point
+│   ├── teacher_manager.py  # Teacher management
+│   ├── schedule_manager.py # Scheduling logic
+│   └── ui/                 # UI components
+├── tests/                  # Unit tests
+├── requirements.txt        # Dependencies
+└── README.md
+
+##🛠️ Development
+Running Tests
+```bash
+python -m unittest discover tests
+
+##🤝 Contributing
+Fork the repository
+
+Create your feature branch (git checkout -b feature/your-feature)
+
+Commit your changes (git commit -m 'Add some feature')
+
+Push to the branch (git push origin feature/your-feature)
+
+Open a Pull Request
+
+##📜 License
+Distributed under the MIT License. See LICENSE for more information
+
+## 📜 Version History
+
+- 1.0.0 (2023-11-15)
+  - Initial release with basic teacher management
+## 💻 System Requirements
+
+- Windows 10+/macOS 10.15+/Linux Ubuntu 20.04+
+- 4GB RAM minimum
+- 200MB disk space
