@@ -64,8 +64,9 @@ A comprehensive desktop application for managing school teachers, their subject 
 
  4. Run the application:
 
-   ```bash
+ 
    python src/main.py   
+   
 **##🖥️ Usage**
 ###Adding a New Teacher
 Click "Add Teacher" from the main menu
