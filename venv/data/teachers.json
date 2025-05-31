@@ -1,0 +1,79 @@
+[
+    {
+        "name": "Mr. Smith",
+        "subjects": [
+            {
+                "name": "Environment Studies",
+                "grades": [
+                    "Grade 1",
+                    "Grade 2",
+                    "Grade 3"
+                ]
+            },
+            {
+                "name": "Geography",
+                "grades": [
+                    "Grade 1"
+                ]
+            }
+        ]
+    },
+    {
+        "name": "Ms. Johnson",
+        "subjects": [
+            {
+                "name": "Geography",
+                "grades": [
+                    "Grade 2"
+                ]
+            },
+            {
+                "name": "ICT",
+                "grades": [
+                    "Grade 3",
+                    "Grade 2"
+                ]
+            }
+        ]
+    },
+    {
+        "name": "suranga",
+        "subjects": [
+            {
+                "name": "English",
+                "grades": [
+                    "Grade 2"
+                ]
+            },
+            {
+                "name": "Mathematics",
+                "grades": [
+                    "Grade 1",
+                    "Grade 2"
+                ]
+            }
+        ]
+    },
+    {
+        "name": "ash",
+        "subjects": [
+            {
+                "name": "Mathematics",
+                "grades": [
+                    "Grade 3",
+                    "Grade 2"
+                ]
+            },
+            {
+                "name": "English",
+                "grades": [
+                    "Grade 2"
+                ]
+            }
+        ]
+    },
+    {
+        "name": "yu",
+        "subjects": []
+    }
+]

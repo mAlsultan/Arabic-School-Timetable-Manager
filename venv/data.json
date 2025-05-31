@@ -1,0 +1,12 @@
+{
+    "grades": [],
+    "subjects": [],
+    "teachers": [
+        "t56",
+        "t65"
+    ],
+    "qualified": {
+        "t56": [],
+        "t65": []
+    }
+}
