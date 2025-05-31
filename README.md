@@ -7,8 +7,8 @@
 
 A comprehensive desktop application for managing school teachers, their subject assignments, and grade-level allocations. Built with Python and Tkinter for easy school administration.
 
-![Teacher Management Interface](screenshots/teacher_management.png)
-*(Example screenshot - replace with your actual screenshots)*
+![Teacher Management Interface](Background.png)
+
 
 ## ✨ Features
 
