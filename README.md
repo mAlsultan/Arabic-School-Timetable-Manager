@@ -66,7 +66,7 @@ A comprehensive desktop application for managing school teachers, their subject 
 
    ```bash
    python src/main.py   
-##🖥️ Usage
+**##🖥️ Usage**
 ###Adding a New Teacher
 Click "Add Teacher" from the main menu
 
@@ -122,6 +122,7 @@ Push to the branch (git push origin feature/your-feature)
 Open a Pull Request
 
 ##📜 License
+
 Distributed under the MIT License. See LICENSE for more information
 
 ## 📜 Version History
