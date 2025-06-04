@@ -59,7 +59,7 @@ Distributed under the MIT License. See LICENSE for more information
 
 ## 📜 Version History
 
-- 1.0.0 (2023-11-15)
+- 1.0.0 (2025-05-30)
   - Initial release with basic teacher management
 ## 💻 System Requirements
 
