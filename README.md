@@ -74,14 +74,13 @@ Distributed under the MIT License. See LICENSE for more information
    git clone https://github.com/your-username/school-timetable-manager.git
    cd school-timetable-manager
 
-2.Set up virtual environment (recommended):
-
-      ```bash
-      python -m venv venv
-      # Windows:
-      venv\Scripts\activate
-      # macOS/Linux:
-      source venv/bin/activate  
+ 2.Set up virtual environment (recommended):
+   ```bash
+   python -m venv venv
+   # Windows:
+   venv\Scripts\activate
+   # macOS/Linux:
+   source venv/bin/activate  
 
  3.Install dependencies:
 
