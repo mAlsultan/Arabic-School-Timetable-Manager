@@ -65,7 +65,7 @@ Distributed under the MIT License. See LICENSE for more information
 
 - Windows 10+/macOS 10.15+/Linux Ubuntu 20.04+
 - 4GB RAM minimum
-- 200MB disk space
+- 200MB disk space 
 
 
 ### Installation
