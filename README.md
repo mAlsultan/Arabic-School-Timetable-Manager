@@ -71,7 +71,7 @@ Distributed under the MIT License. See LICENSE for more information
 ### Installation
  Clone the repository:
    ```bash
-   git clone https://github.com/your-username/school-timetable-manager.git
+   git clone https://github.com/nethmidileka/school-timetable-manager.git
    cd school-timetable-manager
  
 
