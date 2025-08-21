@@ -9,8 +9,8 @@ class HomePage(tk.Frame):
         self.controller = controller
 
         # Main title
-        tk.Label(self, text="School Management System", font=("Arial", 16, "bold")).pack(pady=20)
-        tk.Label(self, text="Home Page", font=("Arial", 14)).pack(pady=10)
+        tk.Label(self, text="نظام إدارة المدرسة", font=("Arial", 16, "bold")).pack(pady=20)
+        tk.Label(self, text="الصفحة الرئيسية", font=("Arial", 14)).pack(pady=10)
 
         # Button container frame for better layout
         button_frame = tk.Frame(self)
@@ -24,19 +24,20 @@ class HomePage(tk.Frame):
         }
 
         # Manage Teachers button
-        tk.Button(button_frame, text="Manage Teachers",
+        tk.Button(button_frame, text="إدارة المعلمين",
                  command=lambda: controller.show_frame(TeacherManagerPage),
                  **button_style).pack(pady=10, fill=tk.X)
 
         # New Manage Subjects button
-        tk.Button(button_frame, text="Manage Subjects",
+        tk.Button(button_frame, text="إدارة المقررات",
                  command=lambda: controller.show_frame(SubjectManagerPage),
                  **button_style).pack(pady=10, fill=tk.X)
 
         # Generate Timetable button
-        tk.Button(button_frame, text="Generate Timetable",
+        tk.Button(button_frame, text="أنشئ الجدول",
                  command=lambda: controller.show_frame(TimetableGeneratorPage),
                  **button_style).pack(pady=10, fill=tk.X)
 
         # Footer
-        tk.Label(self, text="© School Management System", font=("Arial", 10)).pack(side=tk.BOTTOM, pady=10)
+
+        tk.Label(self, text="حقوق الطبع محفوظة لابتدائية بني معن", font=("Arial", 10)).pack(side=tk.BOTTOM, pady=10)
