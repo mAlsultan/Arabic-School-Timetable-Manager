@@ -28,12 +28,12 @@ class SubjectManagerPage(ttk.Frame):
         
         # Header
         ttk.Label(self.container, 
-                 text="Subject Manager", 
+                 text="إدارة المقررات", 
                  style='Header.TLabel').pack(pady=(0, 20))
         
         # Subject list frame with card styling
         self.list_frame = ttk.LabelFrame(self.container, 
-                                       text="Subject List",
+                                       text="قائمة المقررات",
                                        style='Card.TLabelframe')
         self.list_frame.pack(fill="both", expand=True, padx=10, pady=10)
         
@@ -50,7 +50,7 @@ class SubjectManagerPage(ttk.Frame):
             relief='solid',
             highlightthickness=0
         )
-        self.subject_listbox.pack(side="left", fill="both", expand=True, padx=5, pady=5)
+        self.subject_listbox.pack(side="right", fill="both", expand=True, padx=5, pady=5)
         
         # Custom scrollbar
         scrollbar = ttk.Scrollbar(
@@ -58,25 +58,25 @@ class SubjectManagerPage(ttk.Frame):
             orient="vertical", 
             command=self.subject_listbox.yview
         )
-        scrollbar.pack(side="right", fill="y", pady=5)
+        scrollbar.pack(side="left", fill="y", pady=5)
         self.subject_listbox.config(yscrollcommand=scrollbar.set)
         
         # Entry frame with card styling
         self.entry_frame = ttk.LabelFrame(self.container,
-                                        text="Add New Subject",
+                                        text="إضافة مقرر جديد",
                                         style='Card.TLabelframe')
         self.entry_frame.pack(fill="x", padx=10, pady=10)
         
         # Subject entry with label
         ttk.Label(self.entry_frame, 
-                 text="Subject Name:", 
-                 style='Bold.TLabel').pack(side="left", padx=10, pady=5)
+                 text="اسم المقرر:", 
+                 style='Bold.TLabel').pack(side="right", padx=10, pady=5)
         
         self.subject_entry = ttk.Entry(
             self.entry_frame,
             style='Custom.TEntry'
         )
-        self.subject_entry.pack(side="left", fill="x", expand=True, padx=10, pady=5)
+        self.subject_entry.pack(side="right", fill="x", expand=True, padx=10, pady=5)
         
         # Bind Enter key to add subject
         self.subject_entry.bind('<Return>', lambda event: self.add_subject())
@@ -88,24 +88,24 @@ class SubjectManagerPage(ttk.Frame):
         # Add subject button
         ttk.Button(
             self.button_frame,
-            text="Add Subject", 
+            text="إضافة", 
             command=self.add_subject,
             style='Success.TButton'
-        ).pack(side="left", padx=10, pady=5, ipadx=15)
+        ).pack(side="right", padx=10, pady=5, ipadx=15)
         
         # Delete subject button
         ttk.Button(
             self.button_frame,
-            text="Delete Selected", 
+            text="حذف المحدد", 
             command=self.delete_subject,
             style='Danger.TButton'
-        ).pack(side="left", padx=10, pady=5, ipadx=15)
+        ).pack(side="right", padx=10, pady=5, ipadx=15)
         
         # Back button
         from home import HomePage  # Avoid circular import
         ttk.Button(
             self.container,
-            text="← Back to Home", 
+            text=">- العودة إلى الرئيسية", 
             command=lambda: controller.show_frame(HomePage),
             style='Secondary.TButton'
         ).pack(pady=(10, 0))
@@ -219,42 +219,43 @@ class SubjectManagerPage(ttk.Frame):
     def add_subject(self):
         subject_name = self.subject_entry.get().strip()
         if not subject_name:
-            messagebox.showwarning("Warning", "Subject name cannot be empty.")
+            messagebox.showwarning("تحذير", "لا يمكن لاسم المقرر أن يكون فارغاً.")
             return
             
         if subject_name in self.subjects:
-            messagebox.showwarning("Warning", "Subject already exists.")
+            messagebox.showwarning("تحذير", "المقرر موجود بالفعل.")
             return
             
         self.subjects.append(subject_name)
         self.save_subjects()
         self.update_listbox()
         self.subject_entry.delete(0, tk.END)
-        messagebox.showinfo("Success", f"Subject '{subject_name}' added successfully")
+        messagebox.showinfo("تم", f"أضفنا المقرر '{subject_name}' بنجاح")
         
     def delete_subject(self):
         selected = self.subject_listbox.curselection()
         if not selected:
-            messagebox.showwarning("Warning", "Please select a subject to delete.")
+            messagebox.showwarning("تحذير", "الرجاء تحديد مقرر لحذفه.")
             return
             
         idx = selected[0]
         subject_name = self.subjects[idx]
         
         confirm = messagebox.askyesno(
-            "Confirm Deletion",
-            f"Are you sure you want to delete '{subject_name}'?",
+            "تأكيد الحذف",
+            f"هل أنت متأكد من حذف المقرر '{subject_name}'?",
             icon='warning'
         )
         if confirm:
             self.subjects.pop(idx)
             self.save_subjects()
             self.update_listbox()
-            messagebox.showinfo("Success", f"Subject '{subject_name}' deleted successfully")
+            messagebox.showinfo("تم", f"حذفنا المقرر '{subject_name}' بنجاح")
             
     def save_subjects(self):
         try:
             with open(SUBJECTS_FILE, "w") as f:
                 json.dump(self.subjects, f, indent=4)
         except Exception as e:
-            messagebox.showerror("Error", f"Failed to save subjects: {str(e)}")
+
+            messagebox.showerror("خطأ", f"فشلنا في حفظ المقرر {str(e)}")
