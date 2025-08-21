@@ -13,7 +13,7 @@ if TYPE_CHECKING:
 DATA_DIR = "data"
 SUBJECTS_FILE = os.path.join(DATA_DIR, "subjects.json")
 TEACHERS_FILE = os.path.join(DATA_DIR, "teachers.json")
-DAYS = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]
+DAYS = ["الأحد", "الإثنين", "الثلاثاء", "الأربعاء", "الخميس"]
 PERIODS = 8  # Number of periods per day
 
 class TimetableGeneratorPage(ttk.Frame):
@@ -634,4 +634,5 @@ class TimetableGeneratorPage(ttk.Frame):
         except PermissionError:
             messagebox.showerror("Error", "Permission denied. Please close the Excel file if it's open.")
         except Exception as e:
+
             messagebox.showerror("Error", f"Failed to export timetables:\n{str(e)}")
