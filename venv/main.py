@@ -41,7 +41,7 @@ class App(tk.Tk):
         os.makedirs(self.DATA_DIR, exist_ok=True)
         
         # Configure main window
-        self.title("School Timetable Generator")
+        self.title("نظام إنشاء جدول المدرسة")
         self.geometry("1280x720")
         self.minsize(1280, 720)
         # Optionally set maxsize if you want to prevent maximizing
@@ -148,16 +148,17 @@ class App(tk.Tk):
         
         # Update window title based on current page
         if page_class == LoginPage:
-            self.title("School Timetable - Login")
+            self.title("جدول المدرسة - تسجيل دخول")
         elif page_class == HomePage:
-            self.title("School Timetable - Dashboard")
+            self.title("جدول المدرسة - الرئيسية")
         elif page_class == TeacherManagerPage:
-            self.title("School Timetable - Teacher Management")
+            self.title("جدول المدرسة - إدارة المعلمين")
         elif page_class == TimetableGeneratorPage:
-            self.title("School Timetable - Generator")
+            self.title("جدول المدرسة - منشئ الجدول")
         elif page_class == SubjectManagerPage:
-            self.title("School Timetable - Subject Management")
+            self.title("جدول المدرسة - إدارة المقررات")
 
 if __name__ == "__main__":
     app = App()
+
     app.mainloop()
