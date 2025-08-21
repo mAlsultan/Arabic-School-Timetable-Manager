@@ -22,7 +22,7 @@ class LoginPage(ttk.Frame):
         
         # Header
         ttk.Label(self.container, 
-                 text="Welcome to Timetable System", 
+                 text="أهلا بك في نظام إدارة الجدول", 
                  style='LoginHeader.TLabel').pack(pady=(0, 30))
         
         # Login frame
@@ -31,14 +31,14 @@ class LoginPage(ttk.Frame):
         
         # Login title
         ttk.Label(login_frame, 
-                 text="Login", 
+                 text="تسجيل دخول", 
                  style='LoginTitle.TLabel').pack(pady=(20, 30))
         
         # Username field
         username_frame = ttk.Frame(login_frame, style='LoginBox.TFrame')
         username_frame.pack(fill='x', padx=30, pady=(0, 15))
         ttk.Label(username_frame, 
-                 text="Username:", 
+                 text="اسم المستخدم:", 
                  style='LoginLabel.TLabel').pack(side='left', padx=(0, 10))
         self.username_entry = ttk.Entry(username_frame, style='Login.TEntry')
         self.username_entry.pack(side='right', expand=True, fill='x')
@@ -47,14 +47,14 @@ class LoginPage(ttk.Frame):
         password_frame = ttk.Frame(login_frame, style='LoginBox.TFrame')
         password_frame.pack(fill='x', padx=30, pady=(0, 30))
         ttk.Label(password_frame, 
-                 text="Password:", 
+                 text="كلمة المرور:", 
                  style='LoginLabel.TLabel').pack(side='left', padx=(0, 10))
         self.password_entry = ttk.Entry(password_frame, show="*", style='Login.TEntry')
         self.password_entry.pack(side='right', expand=True, fill='x')
         
         # Login button
         ttk.Button(login_frame, 
-                  text="Login", 
+                  text="دخول", 
                   command=self.login,
                   style='Login.TButton').pack(pady=(0, 20), ipadx=20, ipady=5)
         
@@ -125,12 +125,12 @@ class LoginPage(ttk.Frame):
         password = self.password_entry.get()
 
         if not username or not password:
-            messagebox.showerror("Error", "Please enter both username and password")
+            messagebox.showerror("خطأ", "أرجوا إدخال اسم المستخدم وكلمة المرور")
             return
 
         try:
             if not os.path.exists(USERS_FILE):
-                messagebox.showerror("Error", f"Users file not found: {USERS_FILE}")
+                messagebox.showerror("خطأ", f"لم أعثر على ملف المستخدمين: {USERS_FILE}")
                 return
 
             with open(USERS_FILE, "r") as f:
@@ -139,6 +139,7 @@ class LoginPage(ttk.Frame):
             if username in users and users[username] == password:
                 self.controller.show_frame(HomePage)
             else:
-                messagebox.showerror("Error", "Invalid username or password")
+                messagebox.showerror("خطأ", "خطأ في اسم المستخدم أو كلمة المرور")
         except Exception as e:
-            messagebox.showerror("Error", f"An error occurred: {str(e)}")
+
+            messagebox.showerror("خطأ", f"حدث خطأ غير متوقع: {str(e)}")
