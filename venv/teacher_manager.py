@@ -16,8 +16,7 @@ class TeacherManagerPage(ttk.Frame):
     def __init__(self, parent, controller):
         super().__init__(parent)
         self.controller = controller
-        self.grades = ["Grade 1A", "Grade 1B","Grade 2A","Grade 2B", "Grade 3A","Grade 3B", "Grade 4A", "Grade 4B","Grade 5A", "Grade 5B",
-                      "Grade 6", "Grade 7", "Grade 8", "Grade 9", "Grade 10", "Grade 11"]
+        self.grades = ['ثالث أ', 'ثالث ب', 'رابع أ', 'رابع ب', 'خامس أ', 'خامس ب', 'سادس أ', 'سادس ب']
         
         # Configure styles
         self.style = ttk.Style()
@@ -32,18 +31,18 @@ class TeacherManagerPage(ttk.Frame):
         
         # Main title
         ttk.Label(self.container, 
-                 text="Teacher and Subject Manager", 
+                 text="إدارة المعلمين والمقررات", 
                  style='Header.TLabel').pack(pady=(0, 20))
         
         # Teacher selection frame
         self.teacher_frame = ttk.LabelFrame(self.container, 
-                                          text="Teacher Management",
+                                          text="إدارة المعلمين",
                                           style='Card.TLabelframe')
         self.teacher_frame.pack(fill="x", pady=10, padx=5)
         
         # Teacher combobox
         ttk.Label(self.teacher_frame, 
-                 text="Select Teacher:", 
+                 text="اختر معلم:", 
                  style='Bold.TLabel').grid(row=0, column=0, padx=10, pady=10, sticky="w")
         
         self.teacher_var = tk.StringVar()
@@ -61,32 +60,32 @@ class TeacherManagerPage(ttk.Frame):
         
         self.add_teacher_btn = ttk.Button(
             btn_frame, 
-            text="Add Teacher", 
+            text="إضافة معلم", 
             command=self.show_add_teacher_dialog,
             style='Accent.TButton'
         )
-        self.add_teacher_btn.pack(side="left", padx=5, ipadx=10)
+        self.add_teacher_btn.pack(side="right", padx=5, ipadx=10)
         
         self.edit_btn = ttk.Button(
             btn_frame, 
-            text="Edit Subjects", 
+            text="تعديل المقررات", 
             command=self.load_teacher_data,
             style='Primary.TButton'
         )
-        self.edit_btn.pack(side="left", padx=5, ipadx=10)
+        self.edit_btn.pack(side="right", padx=5, ipadx=10)
         
         self.refresh_btn = ttk.Button(
             btn_frame, 
-            text="Refresh", 
+            text="تحديث", 
             command=self.refresh_data,
             style='Secondary.TButton'
         )
-        self.refresh_btn.pack(side="left", padx=5, ipadx=10)
+        self.refresh_btn.pack(side="right", padx=5, ipadx=10)
 
         # Subject management frame (initially hidden)
         self.subject_frame = ttk.LabelFrame(
             self.container, 
-            text="Subject Assignment by Grade",
+            text="تعيين المقررات حسب الفصل",
             style='Card.TLabelframe'
         )
         
@@ -114,7 +113,7 @@ class TeacherManagerPage(ttk.Frame):
             
             # Subject selection
             ttk.Label(frame, 
-                     text="Select Subject:", 
+                     text="تحديد المقرر:", 
                      style='Bold.TLabel').grid(row=0, column=0, padx=10, pady=10, sticky="w")
             
             self.subject_vars[grade] = tk.StringVar()
@@ -129,7 +128,7 @@ class TeacherManagerPage(ttk.Frame):
             # Add subject button
             ttk.Button(
                 frame, 
-                text="Add Subject", 
+                text="إضافة مقرر", 
                 command=lambda g=grade: self.add_subject_to_grade(g),
                 style='Small.TButton'
             ).grid(row=0, column=2, padx=10, pady=10)
@@ -151,14 +150,14 @@ class TeacherManagerPage(ttk.Frame):
             relief='solid',
             highlightthickness=0
         )
-        self.subject_listbox.pack(side="left", fill="both", expand=True)
+        self.subject_listbox.pack(side="right", fill="both", expand=True)
         
         scrollbar = ttk.Scrollbar(
             list_frame, 
             orient="vertical", 
             command=self.subject_listbox.yview
         )
-        scrollbar.pack(side="right", fill="y")
+        scrollbar.pack(side="left", fill="y")
         self.subject_listbox.config(yscrollcommand=scrollbar.set)
         
         # Action buttons frame
@@ -167,25 +166,25 @@ class TeacherManagerPage(ttk.Frame):
         
         self.del_subject_btn = ttk.Button(
             btn_frame, 
-            text="Delete Selected", 
+            text="حذف المحدد", 
             command=self.delete_subject_from_teacher,
             style='Danger.TButton'
         )
-        self.del_subject_btn.pack(side="left", padx=5, ipadx=10)
+        self.del_subject_btn.pack(side="right", padx=5, ipadx=10)
         
         self.save_btn = ttk.Button(
             btn_frame, 
-            text="Save Changes", 
+            text="حفظ التغييرات", 
             command=self.save_teacher_data,
             style='Success.TButton'
         )
-        self.save_btn.pack(side="right", padx=5, ipadx=10)
+        self.save_btn.pack(side="left", padx=5, ipadx=10)
         
         # Back button
         from home import HomePage
         ttk.Button(
             self.container, 
-            text="← Back to Home", 
+            text=">- العودة إلى الرئيسية", 
             command=lambda: controller.show_frame(HomePage),
             style='Secondary.TButton'
         ).pack(pady=(20, 0))
@@ -283,7 +282,7 @@ class TeacherManagerPage(ttk.Frame):
     def refresh_data(self):
         """Refresh both teachers and subjects"""
         self.load_data()
-        messagebox.showinfo("Success", "Data refreshed successfully")
+        messagebox.showinfo("تم", "تم تحديث البيانات بنجاح")
 
     def load_data(self):
         """Load data from JSON files"""
@@ -323,7 +322,7 @@ class TeacherManagerPage(ttk.Frame):
     def show_add_teacher_dialog(self):
         """Show dialog to add new teacher"""
         dialog = tk.Toplevel(self)
-        dialog.title("Add New Teacher")
+        dialog.title("أضف معلم جديد")
         dialog.resizable(False, False)
         dialog.configure(bg='#f5f7fa')
         
@@ -331,7 +330,7 @@ class TeacherManagerPage(ttk.Frame):
         self._center_dialog(dialog)
         
         ttk.Label(dialog, 
-                 text="Teacher Name:", 
+                 text="اسم المعلم:", 
                  style='Bold.TLabel').pack(pady=5)
         
         name_entry = ttk.Entry(dialog, style='Custom.TCombobox')
@@ -341,14 +340,14 @@ class TeacherManagerPage(ttk.Frame):
         btn_frame.pack(pady=10)
         
         ttk.Button(btn_frame, 
-                  text="Cancel", 
+                  text="إلغاء", 
                   command=dialog.destroy,
-                  style='Secondary.TButton').pack(side="left", padx=10)
+                  style='Secondary.TButton').pack(side="right", padx=10)
         
         ttk.Button(btn_frame, 
-                  text="Add", 
+                  text="إضافة", 
                   command=lambda: self.add_teacher(name_entry.get(), dialog),
-                  style='Success.TButton').pack(side="right", padx=10)
+                  style='Success.TButton').pack(side="left", padx=10)
         
         name_entry.focus_set()
 
@@ -365,11 +364,11 @@ class TeacherManagerPage(ttk.Frame):
         """Add new teacher to the system"""
         name = name.strip()
         if not name:
-            messagebox.showwarning("Warning", "Teacher name cannot be empty.")
+            messagebox.showwarning("تحذير", "لا يمكن لاسم المعلم أن يكون فارغ")
             return
             
         if any(t["name"].lower() == name.lower() for t in self.teachers):
-            messagebox.showwarning("Warning", "Teacher already exists.")
+            messagebox.showwarning("تحذير", "المعلم موجود بالفعل.")
             return
             
         self.teachers.append({
@@ -380,13 +379,13 @@ class TeacherManagerPage(ttk.Frame):
         self.update_teacher_combobox()
         self.teacher_var.set(name)
         dialog.destroy()
-        messagebox.showinfo("Success", f"Teacher {name} added successfully")
+        messagebox.showinfo("تم", f"المعلم {name} أضيف بنجاح")
 
     def load_teacher_data(self):
         """Load subjects for selected teacher"""
         teacher_name = self.teacher_var.get()
         if not teacher_name:
-            messagebox.showwarning("Warning", "Please select a teacher first.")
+            messagebox.showwarning("تحذير", "الرجاء اختيار معلم أولاً.")
             return
             
         if not self.subject_frame.winfo_ismapped():
@@ -394,7 +393,7 @@ class TeacherManagerPage(ttk.Frame):
             
         teacher = next((t for t in self.teachers if t["name"] == teacher_name), None)
         if not teacher:
-            messagebox.showerror("Error", "Teacher not found!")
+            messagebox.showerror("خطأ", "المعلم غير موجود!")
             return
             
         self.update_subject_listbox(teacher)
@@ -410,17 +409,17 @@ class TeacherManagerPage(ttk.Frame):
         """Add subject to teacher for specific grade"""
         teacher_name = self.teacher_var.get()
         if not teacher_name:
-            messagebox.showwarning("Warning", "Please select a teacher first.")
+            messagebox.showwarning("تحذير", "الرجاء اختيار معلم أولاً.")
             return
             
         subject_name = self.subject_vars[grade].get()
         if not subject_name:
-            messagebox.showwarning("Warning", "Please select a subject.")
+            messagebox.showwarning("تحذير", "الرجاء اختيار مقرر.")
             return
             
         teacher = next((t for t in self.teachers if t["name"] == teacher_name), None)
         if not teacher:
-            messagebox.showerror("Error", "Teacher not found!")
+            messagebox.showerror("خطأ", "المعلم غير موجود!")
             return
             
         # Check if subject exists for this teacher
@@ -428,8 +427,8 @@ class TeacherManagerPage(ttk.Frame):
         
         if subject_data:
             if grade in subject_data["grades"]:
-                messagebox.showwarning("Warning", 
-                    f"{subject_name} already assigned to {teacher_name} for {grade}")
+                messagebox.showwarning("تحذير", 
+                    f"{subject_name} تم تعيينه إلى المعلم {teacher_name} لفصل {grade}")
                 return
             else:
                 subject_data["grades"].append(grade)
@@ -446,42 +445,42 @@ class TeacherManagerPage(ttk.Frame):
         """Delete selected subject from teacher"""
         teacher_name = self.teacher_var.get()
         if not teacher_name:
-            messagebox.showwarning("Warning", "Please select a teacher first.")
+            messagebox.showwarning("تحذير", "الرجاء اختيار معلم أولاً")
             return
             
         selected = self.subject_listbox.curselection()
         if not selected:
-            messagebox.showwarning("Warning", "Please select a subject to delete.")
+            messagebox.showwarning("تحذير", "الرجاء تحديد مقرر للحذف.")
             return
             
         idx = selected[0]
         teacher = next((t for t in self.teachers if t["name"] == teacher_name), None)
         if not teacher:
-            messagebox.showerror("Error", "Teacher not found!")
+            messagebox.showerror("خطأ", "المعلم غير موجود!")
             return
             
         subject_name = teacher["subjects"][idx]["name"]
         
         confirm = messagebox.askyesno(
-            "Confirm Deletion",
-            f"Remove {subject_name} from {teacher_name}'s subjects?",
+            "تأكيد الحذف",
+            f"أتريد حذف {subject_name} من مقررات المعلم {teacher_name}'؟",
             icon="warning"
         )
         
         if confirm:
             teacher["subjects"].pop(idx)
             self.update_subject_listbox(teacher)
-            messagebox.showinfo("Success", f"Removed {subject_name} from {teacher_name}")
+            messagebox.showinfo("تم", f"حذفنا {subject_name} من {teacher_name}")
 
     def save_teacher_data(self):
         """Save teacher data to file"""
         try:
             with open(TEACHERS_FILE, "w") as f:
                 json.dump(self.teachers, f, indent=4)
-            messagebox.showinfo("Success", "Teacher data saved successfully")
+            messagebox.showinfo("تم", "تم حفظ بيانات المعلم بنجاح.")
             return True
         except Exception as e:
-            messagebox.showerror("Error", f"Failed to save teacher data: {str(e)}")
+            messagebox.showerror("خطأ", f"فشلنا في حفظ بيانات المعلم: {str(e)}")
             return False
 
     def save_subjects(self):
@@ -491,5 +490,6 @@ class TeacherManagerPage(ttk.Frame):
                 json.dump(self.subjects, f, indent=4)
             return True
         except Exception as e:
-            messagebox.showerror("Error", f"Failed to save subjects: {str(e)}")
+            messagebox.showerror("خطأ", f"فشلنا في حفظ بيانات المقرر: {str(e)}")
+
             return False
