@@ -1,5 +1,5 @@
 # scheduler.py
-DAYS = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]
+DAYS = ["الأحد", "الإثنين", "الثلاثاء", "الأربعاء", "الخميس"]
 
 def generate_timetable(subject_periods):
     total_periods = sum(subject_periods.values())
@@ -24,3 +24,4 @@ def generate_timetable(subject_periods):
                 timetable[r][c] = ""
 
     return timetable
+
