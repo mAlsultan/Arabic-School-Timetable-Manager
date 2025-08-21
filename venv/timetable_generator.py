@@ -40,29 +40,28 @@ class TimetableGeneratorPage(ttk.Frame):
         from home import HomePage
         ttk.Button(
             title_frame,
-            text="← Back to Home",
+            text=">- العودة إلى الرئيسية",
             command=lambda: controller.show_frame(HomePage),
             style='Secondary.TButton'
-        ).pack(side="left", padx=10)
+        ).pack(side="right", padx=10)
         
         # Page title
         ttk.Label(
             title_frame,
-            text="Timetable Generator",
+            text="منشئ الجدول",
             style='Header.TLabel'
-        ).pack(side="left", padx=10)
+        ).pack(side="right", padx=10)
         
         # Grade selection frame with card styling
         grade_frame = ttk.LabelFrame(
             self.container,
-            text="Select Grades",
+            text="اختر الفصول",
             style='Card.TLabelframe'
         )
         grade_frame.pack(fill="x", padx=10, pady=10)
         
         self.grade_vars = {}
-        grades =  ["Grade 1A", "Grade 1B","Grade 2A","Grade 2B", "Grade 3A","Grade 3B", "Grade 4A", "Grade 4B","Grade 5A", "Grade 5B",
-                   "Grade 6", "Grade 7", "Grade 8", "Grade 9", "Grade 10", "Grade 11"]
+        grades =  ['ثالث أ', 'ثالث ب', 'رابع أ', 'رابع ب', 'خامس أ', 'خامس ب', 'سادس أ', 'سادس ب']
         
         # Create checkboxes for each grade with consistent styling
         for i, grade in enumerate(grades):
@@ -80,7 +79,7 @@ class TimetableGeneratorPage(ttk.Frame):
         # Select all grades button
         ttk.Button(
             grade_frame, 
-            text="Select All", 
+            text="تحديد الكل", 
             command=lambda: [var.set(1) for var in self.grade_vars.values()],
             style='Small.TButton'
         ).grid(row=0, column=len(grades), padx=5, pady=5)
@@ -108,18 +107,18 @@ class TimetableGeneratorPage(ttk.Frame):
         # Refresh button
         ttk.Button(
             action_frame,
-            text="🔄 Refresh Subjects",
+            text="🔄 تحديث المقررات",
             command=self.load_subjects,
             style='Secondary.TButton'
-        ).pack(side="left", padx=5, ipadx=10)
+        ).pack(side="right", padx=5, ipadx=10)
         
         # Generate button with accent color
         ttk.Button(
             action_frame, 
-            text="Generate Timetable", 
+            text="أنشئ الجدول", 
             command=self.generate_timetable,
             style='Accent.TButton'
-        ).pack(side="right", padx=5, ipadx=10)
+        ).pack(side="left", padx=5, ipadx=10)
         
         # Output frame for displaying timetables
         self.output_frame = ttk.Frame(self.container, style='Card.TFrame')
@@ -235,7 +234,7 @@ class TimetableGeneratorPage(ttk.Frame):
         
         # Label for the grade's subject selection
         ttk.Label(frame, 
-                 text=f"Select Subjects for {grade}", 
+                 text=f"اختر مقررات فصل {grade}", 
                  style='Bold.TLabel').pack(pady=5)
         
         # Frame for subject checkboxes and period entries
@@ -256,7 +255,7 @@ class TimetableGeneratorPage(ttk.Frame):
                 subjects = json.load(f)
         except (FileNotFoundError, json.JSONDecodeError):
             subjects = []
-            messagebox.showwarning("Warning", "No subjects found. Please add subjects first.")
+            messagebox.showwarning("تحذير", "لم نعثر على مقررات، نرجوا إضافة مقررات أولاً.")
             return
 
         # Clear existing widgets in each grade's subject frame
@@ -287,8 +286,8 @@ class TimetableGeneratorPage(ttk.Frame):
             canvas.create_window((0, 0), window=scrollable_frame, anchor="nw")
             canvas.configure(yscrollcommand=scrollbar.set)
             
-            canvas.pack(side="left", fill="both", expand=True)
-            scrollbar.pack(side="right", fill="y")
+            canvas.pack(side="right", fill="both", expand=True)
+            scrollbar.pack(side="left", fill="y")
             
             # Update the subj_frame reference to the scrollable frame
             frame.subj_frame = scrollable_frame
@@ -342,7 +341,7 @@ class TimetableGeneratorPage(ttk.Frame):
         # Get selected grades
         selected_grades = [grade for grade, var in self.grade_vars.items() if var.get()]
         if not selected_grades:
-            messagebox.showwarning("Warning", "Please select at least one grade")
+            messagebox.showwarning("تحذير", "يرجى اختيار فصل واحد على الأقل")
             return
             
         # Get selected subjects and periods for each grade
@@ -350,14 +349,14 @@ class TimetableGeneratorPage(ttk.Frame):
         for grade in selected_grades:
             selected_subjects = [subj for subj, var in self.grade_subject_vars[grade].items() if var.get()]
             if not selected_subjects:
-                messagebox.showwarning("Warning", f"Please select at least one subject for {grade}")
+                messagebox.showwarning("تحذير", f"يرجى اختيار مقرر واحد على الأقل لفصل {grade}")
                 return
                 
             subject_periods = {}
             for subject in selected_subjects:
                 periods = self.grade_period_entries[grade][subject].get()
                 if not periods.isdigit() or int(periods) <= 0:
-                    messagebox.showwarning("Warning", f"Please enter valid periods for {subject} in {grade}")
+                    messagebox.showwarning("تحذير", f"يرجى إدخال عدد حصص صحيح لـ{subject} صف {grade}")
                     return
                 subject_periods[subject] = int(periods)
             
@@ -369,7 +368,7 @@ class TimetableGeneratorPage(ttk.Frame):
                 teachers = json.load(f)
         except (FileNotFoundError, json.JSONDecodeError):
             teachers = []
-            messagebox.showwarning("Warning", "No teacher data found")
+            messagebox.showwarning("تحذير", "لم نعثر على بيانات معلمين")
             return
             
         # Generate timetable for all grades together
@@ -377,7 +376,7 @@ class TimetableGeneratorPage(ttk.Frame):
             all_timetables = self.generate_with_ortools(grade_subject_periods, teachers)
             self.show_timetables(all_timetables)
         except Exception as e:
-            messagebox.showerror("Error", f"Failed to generate timetables: {str(e)}")
+            messagebox.showerror("خطأ", f"فشل في إنشاء جدول: {str(e)}")
 
     def generate_with_ortools(self, grade_subject_periods: Dict[str, Dict[str, int]], teachers: List[dict]):
         """Generate timetable for multiple grades with no teacher clashes"""
@@ -499,7 +498,7 @@ class TimetableGeneratorPage(ttk.Frame):
             )
             
             # Configure columns with increased width
-            tree.heading('Period', text='Period')
+            tree.heading('Period', text='الحصة')
             tree.column('Period', width=100, anchor='center')
             
             for day in DAYS:
@@ -546,10 +545,10 @@ class TimetableGeneratorPage(ttk.Frame):
             
             ttk.Button(
                 export_frame,
-                text=f"Export {grade} to Excel",
+                text=f"تصدير {grade} إلى أكسل",
                 command=lambda g=grade, t=timetable: self.export_grade_to_excel(g, t),
                 style='Small.TButton'
-            ).pack(side="right", padx=5)
+            ).pack(side="left", padx=5)
         
         # Add export all button
         export_all_frame = ttk.Frame(self.output_frame, style='Card.TFrame')
@@ -557,10 +556,10 @@ class TimetableGeneratorPage(ttk.Frame):
         
         ttk.Button(
             export_all_frame,
-            text="Export All to Excel",
+            text="تصدير الكل إلى إكسل",
             command=lambda: self.export_to_excel(timetables),
             style='Accent.TButton'
-        ).pack(side="right", padx=5, pady=5)
+        ).pack(side="left", padx=5, pady=5)
 
     def export_grade_to_excel(self, grade: str, timetable: Dict[str, List[tuple]]):
         """Export a single grade's timetable to Excel"""
@@ -580,7 +579,7 @@ class TimetableGeneratorPage(ttk.Frame):
             file_path = filedialog.asksaveasfilename(
                 defaultextension=".xlsx",
                 filetypes=[("Excel files", "*.xlsx"), ("All files", "*.*")],
-                title=f"Save {grade} Timetable As",
+                title=f"حفظ جدول فصل {grade} كـ",
                 initialfile=f"{grade}_timetable.xlsx",
                 initialdir=DATA_DIR
             )
@@ -590,9 +589,9 @@ class TimetableGeneratorPage(ttk.Frame):
                 
             # Write to Excel
             df.to_excel(file_path, sheet_name=grade[:31], index=False)
-            messagebox.showinfo("Success", f"{grade} timetable exported to:\n{file_path}")
+            messagebox.showinfo("تم", f"جدول فصل {grade} تصدر إلى:\n{file_path}")
         except Exception as e:
-            messagebox.showerror("Error", f"Failed to export {grade} timetable:\n{str(e)}")
+            messagebox.showerror("خطأ", f"فشل في تصدير جدول فصل {grade}:\n{str(e)}")
 
     def export_to_excel(self, timetables: Dict[str, Dict[str, List[tuple]]]):
         """Export all timetables to a single Excel file with multiple sheets"""
@@ -601,7 +600,7 @@ class TimetableGeneratorPage(ttk.Frame):
             file_path = filedialog.asksaveasfilename(
                 defaultextension=".xlsx",
                 filetypes=[("Excel files", "*.xlsx"), ("All files", "*.*")],
-                title="Save All Timetables As",
+                title="حفظ كل الجداول كـ",
                 initialfile="all_timetables.xlsx",
                 initialdir=DATA_DIR
             )
@@ -630,9 +629,10 @@ class TimetableGeneratorPage(ttk.Frame):
                         max_len = max(df[col].astype(str).map(len).max(), len(col))
                         worksheet.set_column(i, i, min(max_len + 2, 50))
             
-            messagebox.showinfo("Success", f"All timetables exported to:\n{file_path}")
+            messagebox.showinfo("تم", f"تم تصدير كل الجداول إلى:\n{file_path}")
         except PermissionError:
-            messagebox.showerror("Error", "Permission denied. Please close the Excel file if it's open.")
+            messagebox.showerror("خطأ", "التصريح مرفوض، تأكد أن ملف الاكسل مغلق وحاول مرة أخرى.")
         except Exception as e:
 
-            messagebox.showerror("Error", f"Failed to export timetables:\n{str(e)}")
+            messagebox.showerror("خطأ", f"فشل في تصدير الجداول:\n{str(e)}")
+
